@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RFP Writer Pro</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: #0f172a;
+    color: #f1f5f9;
+  }
+  .container {
+    text-align: center;
+    padding: 40px;
+  }
+  h1 {
+    font-size: 48px;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  p {
+    color: #94a3b8;
+    font-size: 18px;
+  }
+  .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🧠 RFP Writer Pro</h1>
+  <p>AI-powered proposal generator with 6 AI Agents + Second Brain</p>
+  <a href="/frontend/index.html" class="btn">🚀 Launch App</a>
+</div>
+</body>
+</html>
