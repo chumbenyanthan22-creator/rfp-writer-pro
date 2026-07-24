@@ -1,46 +1,45 @@
-const path = require('path');
 const express = require('express');
+const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, '..')));
 
-// Serve static files from frontend
-app.use(express.static(path.join(__dirname, '../frontend')));
-
-// API Routes
 app.post('/api/proposals/generate', (req, res) => {
   const { rfpContent, language, industry } = req.body;
-  
-  try {
-    const proposal = {
+
+  const proposalText = `
+📄 PROPOSAL GENERATED
+
+Industry: ${industry || 'General'}
+Language: ${language || 'English'}
+
+Based on your RFP:
+${rfpContent ? rfpContent.substring(0, 200) + '...' : 'No RFP content provided'}
+
+EXECUTIVE SUMMARY:
+We are pleased to submit our proposal. Our team brings extensive expertise.
+
+✅ Ready for submission!
+  `;
+
+  res.json({
+    success: true,
+    proposal: {
       id: Date.now(),
-      content: `Based on your RFP:\n\n${rfpContent.substring(0, 200)}...\n\nEXECUTIVE SUMMARY:\n- We are pleased to submit our proposal. Our team brings extensive expertise in ${industry || 'this industry'}\n\nTECHNICAL APPROACH:\n- Our methodology combines industry best practices with innovative solutions.\n\nPRICING:\n- Competitive pricing structure optimized for value delivery.`,
+      content: proposalText,
       language: language || 'English',
-      industry: industry || 'General',
-      created_at: new Date().toISOString()
-    };
-    
-    res.json({ success: true, proposal });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+      industry: industry || 'General'
+    },
+    creditsRemaining: 4
+  });
 });
 
-// Serve index.html for all other routes
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+  res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
 
-// Error handling
-app.use((err, req, res, next) => {
-  console.error(err);
-  res.status(500).json({ error: 'Internal Server Error' });
-});
-
-// Start server
 app.listen(PORT, () => {
-  console.log(`RFP Writer Pro server running on port ${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
 });
