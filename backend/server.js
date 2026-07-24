@@ -1,10 +1,13 @@
+
 const express = require('express');
 const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Serve static files from the frontend folder
 app.use(express.static(path.join(__dirname, '../frontend')));
 
+// Serve index.html for all routes
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
